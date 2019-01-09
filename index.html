@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="iso-8859-1"?> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="Itzel Abigail Aguilar">
+<meta name="description" content="Prueba tecnica :) ">
+<title>Let's play rock, paper, scissors</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="estilo.css">
+
+	<!-- jquery para titulo -->
+	<script>
+	$(document).ready(function(){
+	  $("#p1").mouseenter(function(){
+		$(this).hide();
+	  });
+	});
+
+
+	$(document).ready(function(){
+	  $("#p2",).mouseenter(function(){
+		$("#p1").show();
+	  });
+	});
+
+	$(document).ready(function(){
+	  $("#resulJugada",).mouseenter(function(){
+		$("#p1").show();
+	  });
+	});
+
+	$(document).ready(function(){
+	  $("#p3",).mouseenter(function(){
+		$("#p1").hide();
+	  });
+	});
+</script>
+	
+	
+	<script type="text/javascript">
+	
+		var jugada=["Piedra","Papel","Tijeras"];
+		var puntosJug=0;
+		var puntosPc=0;
+		
+		function partida(valor){
+			var numRandomPc;
+			var divresulado;
+			resulJugadaPartida="<div>";
+			
+			<!-- Jugada random de PC -->
+			numRandomPc=Math.floor(Math.random()*3);
+			divresulado=document.getElementById("resulJugada");
+			scorePc=document.getElementById("scoreP");
+			scoreJu=document.getElementById("scoreJ");
+			
+
+			var jugadaJug=valor;
+			var jugadaPc=numRandomPc;
+			
+			<!-- Color de opcion para jugador -->
+			switch (jugada[jugadaJug]) {
+				  case "Piedra":
+					resulJugadaPartida +="<div>Elegiste: <b><span style='color:#FF333E; '> Piedra </span></b></div>";
+					break;
+				  case "Papel":
+					resulJugadaPartida +="<div>Elegiste: <b><span style='color:#33A0FF;'> Papel </span></b></div>";					
+					break;
+				  case "Tijeras":
+					resulJugadaPartida +="<div>Elegiste: <b><span style='color:#3EC305;'> Tijeras </span></b></div>";
+					break;
+				}
+			
+			<!-- Color de opcion para pc -->
+			switch (jugada[jugadaPc]) {
+				  case "Piedra":
+					resulJugadaPartida +="<div>La Pc eligió: <b><span style='color:#FF333E;'> Piedra </span></b></div>";
+					break;
+				  case "Papel":
+					resulJugadaPartida +="<div>La Pc eligió: <b><span style='color:#33A0FF;'> Papel </span></b></div>";					
+					break;
+				  case "Tijeras":
+					resulJugadaPartida +="<div>La Pc eligió: <b><span style='color:#3EC305;'> Tijeras </span></b></div>";
+					break;
+				}	
+			
+
+			var piedra=0;
+			var papel=1;
+			var tijera=2;
+			
+			<!-- comparacion para Resultado y acumulador de puntos-->
+			if(jugadaJug==piedra){
+			
+				switch (jugadaPc) {
+				  case 0:
+					resulJugadaPartida += " Empataste :/";
+					break;
+				  case 1:
+					resulJugadaPartida += " Perdiste :c";
+					puntosPc++;
+					break;
+				  case 2:
+					resulJugadaPartida +=  " Ganaste :D";
+					puntosJug++;
+					break;
+				}
+			}
+
+			if(jugadaJug==papel){
+				switch (jugadaPc) {
+				  case 0:
+					resulJugadaPartida += " Empataste :/";
+					puntosJug++;
+					break;
+				  case 1:
+					resulJugadaPartida += " Perdiste :c";
+					break;
+				  case 2:
+					resulJugadaPartida +=  " Ganaste :D";
+					puntosPc++;
+					break;
+				}
+			}
+	
+			if(jugadaJug==tijera){
+				switch (jugadaPc) {
+				  case 0:
+					resulJugadaPartida += " Empataste :/";
+					puntosPc++;
+					break;
+				  case 1:
+					resulJugadaPartida += " Perdiste :c";
+					puntosJug++;
+					break;
+				  case 2:
+					resulJugadaPartida +=  " Ganaste :D";
+					break;
+				}			
+			}resulJugadaPartida +="</div>";
+			
+			<!-- envio de resultados y puntos -->
+			divresulado.innerHTML=resulJugadaPartida;
+			scorePc.innerHTML= puntosPc 
+			scoreJu.innerHTML= puntosJug ;
+		}
+
+
+		
+	</script>
+	<p id="p1" class = "t1">Rock, paper, scissors</p>
+	
+</head>
+
+<body>
+
+	<div class="a">
+		<div style="float:left;width: 30%", class="titulo1", id="p2">
+			<div>Let's play rock,</div>
+			<div>paper, scissors!</div>
+		</div>
+		
+		<!-- Marcador -->
+		<div style="float:left;width: 30%" id="p3">
+			<div class="scoree" >SCORE:</div>
+			<div class="scoree2" style= "left: 60%; top: 28%;" >Tu : <a id="scoreJ"></a></div>
+			<div class="scoree2"style= "left: 60%; top: 31%;" >Pc : <a id="scoreP"></a></div>
+		</div>  
+
+	</div>
+	<div class="b">
+	</div>
+	
+		<!-- opciones para usuario -->
+		<div class="c">
+			<p class = "botones">Elige tu jugada</p>
+			<input type="button" class="piedra" id="0" name="piedra" value="Piedra" onClick="partida(0);">  
+			<input type="button" class="papel" id="1" name="papel" value="Papel" onClick="partida(1);">  
+			<input type="button" class="tijera" id="2" name="tijeras" value="Tijeras" onClick="partida(2);">
+			
+			<br></br>
+			<!-- imprime resultado -->
+			<div id="resulJugada" class="result"></div>
+		</div> 
+
+	
+	<!-- reiniciar partidas -->
+	<a class ="restart" href="javascript:location.reload()">Restart (R)</a>
+
+</body>
+</html>
